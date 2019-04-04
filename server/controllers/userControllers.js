@@ -13,46 +13,49 @@ class UserController {
 
     client.verifyIdToken({
       idToken : req.body.id_token,
-      audience : process.env.CLIENT_ID })
+      audience : process.env.CLIENT_ID 
+    })
 
-      .then(response => {
+      .then((response) => {
         logged = response.payload
         return model.findOne({ email: logged.email })
-
       })
 
-      .then(data => {
+      .then((data) => {
         if (data) {
+          const payload = {
+            id: data._id,
+            email: data.email
+          }
+
+          const token = jwt.sign(payload, process.env.JWTSECRET)
+
           res.status(200).json({
-            message: 'user succesfully logged',
-            token: jwt.sign({
-              id: data.id,
-              email: data.email
-            }, process.env.JWTSECRET), data: data
+            token: token
           })
         } else {
-          return model.create(
-            {
-              first_name: logged.given_name,
-              last_name: logged.family_name,
-              email: logged.email,
-            }
-          )
+          model.create({
+            firstName: logged.given_name,
+            lastName: logged.family_name,
+            email: logged.email
+          })
+
+          .then((data) => {
+            res.status(201).json({
+              message: 'user created',
+              token: jwt.sign({
+                id: logged.id,
+                email: logged.email
+              }, process.env.JWTSECRET), data: data
+            })
+          })
         }
       })
 
-      .then(data => {
-        res.status(201).json({
-          message: 'user created',
-          token: jwt.sign({
-            id: logged.id,
-            email: logged.email
-          }, process.env.JWTSECRET), data: data
+      .catch((err) => {
+        res.status(500).json({
+          message: err.message
         })
-      })
-
-      .catch(err => {
-        res.status(err).json(err)
       })
   }
 }
