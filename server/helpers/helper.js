@@ -59,6 +59,8 @@ module.exports = {
      }
     })
     return { agi, int, str }
-  }
+  },
+
+  
 
 }
