@@ -37,7 +37,7 @@ class UserController {
           model.create({
             firstName: logged.given_name,
             lastName: logged.family_name,
-            email: logged.email
+            email: logged.email,
           })
 
           .then((data) => {
