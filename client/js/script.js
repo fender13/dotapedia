@@ -24,6 +24,8 @@ $(document).ready(function( ) {
 })
 
 function youtubeEmbeded() {
+  $(`#landing-page`).hide()
+
   const inputSearch = $(`#search-input`).val()
   console.log(inputSearch)
   $(`#player`).empty()
@@ -102,13 +104,13 @@ function groupHeroesByAttr(array){
   array.forEach((el) => {
     switch(el.primary_attr) {
       case 'agi':
-        agi.push(el.img)
+        agi.push(el)
       break;
       case 'int':
-        int.push(el.img)
+        int.push(el)
       break;
       case 'str': 
-        str.push(el.img)
+        str.push(el)
       break;
       default:
       break;
@@ -155,15 +157,61 @@ function getLiveStream() {
     })
 }
 
+$(`#content-cards`).on('click', '.see-detail', function(){
+  const id = this.id  
 
-function generateHeroCard(imgurl) {
+  $.ajax({
+    url: `${baseurl}/dota/heroes`,
+    method: 'GET'
+  })
+  .done((data)=>{
+    // console.log(data)
+    $(`#exampleModalLabel`).html(`Hero <img src="${data.stats[id - 1].icon} "> Detail :` )
+    $('.modal-body').html(`
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="" class="img-fluid">
+            </div>
+            <div class="col-md-8">
+                <ul class="list-group" style="margin-left:-52%">
+    <li class="list-group-item"><h3>${data.stats[id - 1].name}</h3></li>
+    <li class="list-group-item">Type:${data.stats[id - 1].attack_type} </li>
+    <li class="list-group-item">Roles:  ${[...data.stats[id - 1].roles]}</li>
+    <li class="list-group-item">Base Health:${data.stats[id - 1].base_health} </li>
+    <li class="list-group-item">Base Mana:${data.stats[id - 1].base_mana} </li>
+    <li class="list-group-item">Base Armor:${data.stats[id - 1].base_armor} </li>
+    <li class="list-group-item">Base Attack Min:${data.stats[id - 1].base_attack_min} </li>
+    <li class="list-group-item">Base Attack Max:${data.stats[id - 1].base_attack_max} </li>
+    <li class="list-group-item">Base Str:${data.stats[id - 1].base_str} </li>
+    <li class="list-group-item">Base Agi:${data.stats[id - 1].base_agi} </li>
+    <li class="list-group-item">Base Int:${data.stats[id - 1].base_int} </li>
+    <li class="list-group-item">Attack Range:${data.stats[id - 1].attack_range} </li>
+    <li class="list-group-item">Attack Rate:${data.stats[id - 1].attack_rate} </li>
+    <li class="list-group-item">Move Speed:${data.stats[id - 1].move_speed} </li>
+    <li class="list-group-item">Projectile Speed:${data.stats[id - 1].projectile_speed} </li>
+    <li class="list-group-item">Legs:${data.stats[id - 1].legs} </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+`)
+  })
+  .fail((err)=> {
+    console.log(err)
+  })
+})
+
+function generateHeroCard(obj) {
   
   $('#content-cards').append
     (`<div class="col-md-3 my-1">
       <div class="card my-3 mx-3">
-      <img class="img-fluid" src="${imgurl}" style="height: 180px;"><br>
-      <a href="#" class="card-link" >Card link</a>
+      <img class="img-fluid" src="${obj.img}" style="height: 180px;"><br>
+      <a href="#" class="card-link see-detail" data-toggle="modal" data-target="#exampleModal" id="${obj.id}" name="${obj.name}" style="text-align:center">See Detail</a>
       </div>
+      
     </div> 
   `)  
   
