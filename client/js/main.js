@@ -1,40 +1,5 @@
 const baseurl = 'http://localhost:3000'
 
-$('document').ready(function() {
-  liveStream()
-})
-
-function liveStream() {
-  $.ajax({
-    method: 'GET',
-    url:`${baseurl}/live/videos`
-  })
-
-    .done((data) => {
-      let html = ''
-      let dataUser = data.data
-      for (let i = 0 ; i< dataUser.length; i++) {
-        html += `
-        <iframe
-            src="https://player.twitch.tv/?channel=${dataUser[i]}&autoplay=false"
-            height="720"
-            width="1280"
-    
-      
-            allowfullscreen="true">
-        </iframe>
-
-
-
-        `
-      }
-      $('.live-stream').append(html);
-    })
-    .fail((err) => {
-      console.log(err)
-    })
-}
-
 function onSignIn(googleUser) {
   var id_token = googleUser.getAuthResponse().id_token
 

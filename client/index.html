@@ -28,12 +28,13 @@
   <!-- Nav Bar-->
   <nav class="navbar navbar-light" style="background-color:black">
  
-      <a class="navbar-brand" style="color:white;"><img src="public/img/images.png" width="40px"
-          height="40px"></i>Dotapedia</a>
-      <a id="livestream-button" class="navbar-brand" style="color:white;" href="#">Live Streaming !</a>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button type="button" class="btn btn-danger">Search</button>
+
+     <button id="landing-button" class="navbar-brand btn btn-link" style="color:white;"><img src="public/img/images.png" width="40px"
+          height="40px"></i>Dotapedia</button>
+      <button id="livestream-button" class="navbar-brand btn btn-link" style="color:white;">Live Streaming !</button>
+      <form class="form-inline" onsubmit="youtubeEmbeded()">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+        <button type="submit" class="btn btn-danger" >Search</button>
         <!--Google Sign in-->
       </form>
       <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
@@ -42,7 +43,8 @@
 
   <!--Main Content-->
   <div id="main-content" class="card-group" style="margin:5px">
-    <div id='livestream' class = "row mx-auto" style="max-width: 90%;"></div> 
+    <h2 id="page-title"></h2>
+    <div id='livestream' class = "row mx-auto my-3" style="max-width: 90%;"></div> 
     <div id= "content-cards" class = "row w-75 my-3 mx-auto"></div>
     <div id="landing-page" class ="card-group">
       <div class="card">
@@ -79,21 +81,12 @@
       </div>
     </div>
   </div>
+  
 
 
+  <div id="player">
 
-
-
-  <div class="live-stream">
-    <!-- <iframe src="https://player.twitch.tv/?autoplay=false&video=v366031213" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe><a href="https://www.twitch.tv/videos/366031213?tt_content=text_link&tt_medium=vod_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch Cena from mercy_stream on www.twitch.tv</a> -->
-
-    <iframe src="https://player.twitch.tv/?channel=Rayuur" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe><a href="https://www.twitch.tv/Rayuur?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch live video from ybicanoooobov on www.twitch.tv</a>
   </div>
-
-
-
-
-
 
 
   <!-- Optional JavaScript -->
