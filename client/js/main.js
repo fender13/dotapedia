@@ -1,5 +1,19 @@
 const baseurl = 'http://localhost:3000'
 
+function liveStream() {
+  $.ajax({
+    method: 'GET',
+    url:`${baseurl}/live/videos`
+  })
+
+    .done((data) => {
+
+    })
+    .fail((err) => {
+      console.log(err)
+    })
+}
+
 function onSignIn(googleUser) {
   var id_token = googleUser.getAuthResponse().id_token
 
