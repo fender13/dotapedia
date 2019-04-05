@@ -11,7 +11,7 @@ const axi = axios.create({
 class LiveStreamController {
   static getVideoLiveId(req, res) {
     axi
-      .get(`/streams?game_id=29595&first=10`)
+      .get(`/streams?game_id=29595&first=21`)
         .then(({ data }) => {
           let gameData = data.data
           let gameID = []

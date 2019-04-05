@@ -6,9 +6,7 @@ ENV.config()
 const saltrounds = Number(process.env.SALTROUNDS) || 10
 
 const dbconnect = process.env.URL_DB
-
-mongoose.connect(`mongodb://localhost:27017/${dbconnect}`, { useNewUrlParser: true })
-
+mongoose.connect(`${dbconnect}`, { useNewUrlParser: true })
 
 const schema = mongoose.Schema
 
