@@ -5,7 +5,7 @@ ENV.config()
 module.exports = (req, res, next) => {
   if (req.headers.hasOwnProperty('token')) {
     try {
-      var decoded = jwt.verify(req.headers.token, process.env.JWT_SECRET)
+      var decoded = jwt.verify(req.headers.token, process.env.JWTSECRET)
       next()
   } catch(e) {
       res.status(400).json({
