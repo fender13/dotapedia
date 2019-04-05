@@ -1,5 +1,5 @@
 $(document).ready(function( ) {
-  $('#sound_tag')[0].play()
+  // $('#sound_tag')[0].play()
 
   $('#landing-button').on('click', function(){
     getLandingPage();
@@ -21,26 +21,80 @@ $(document).ready(function( ) {
       getLiveStream();
   })
 
+  $(`#content-cards`).on('click', '.see-detail', function(){
+    const id = this.id  
+  
+    $.ajax({
+      url: `${baseurl}/dota/heroes`,
+      method: 'GET',
+      headers: { 'token': localStorage.getItem('token') }
+    })
+    .done((data)=>{
+      // console.log(data)
+      $(`#exampleModalLabel`).html(`Hero <img src="${data.stats[id - 1].icon} "> Detail :` )
+      $('.modal-body').html(`
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-4">
+                  <img src="" class="img-fluid">
+              </div>
+              <div class="col-md-8">
+                  <ul class="list-group" style="margin-left:-52%">
+      <li class="list-group-item"><h3>${data.stats[id - 1].name}</h3></li>
+      <li class="list-group-item">Type:${data.stats[id - 1].attack_type} </li>
+      <li class="list-group-item">Roles:  ${[...data.stats[id - 1].roles]}</li>
+      <li class="list-group-item">Base Health:${data.stats[id - 1].base_health} </li>
+      <li class="list-group-item">Base Mana:${data.stats[id - 1].base_mana} </li>
+      <li class="list-group-item">Base Armor:${data.stats[id - 1].base_armor} </li>
+      <li class="list-group-item">Base Attack Min:${data.stats[id - 1].base_attack_min} </li>
+      <li class="list-group-item">Base Attack Max:${data.stats[id - 1].base_attack_max} </li>
+      <li class="list-group-item">Base Str:${data.stats[id - 1].base_str} </li>
+      <li class="list-group-item">Base Agi:${data.stats[id - 1].base_agi} </li>
+      <li class="list-group-item">Base Int:${data.stats[id - 1].base_int} </li>
+      <li class="list-group-item">Attack Range:${data.stats[id - 1].attack_range} </li>
+      <li class="list-group-item">Attack Rate:${data.stats[id - 1].attack_rate} </li>
+      <li class="list-group-item">Move Speed:${data.stats[id - 1].move_speed} </li>
+      <li class="list-group-item">Projectile Speed:${data.stats[id - 1].projectile_speed} </li>
+      <li class="list-group-item">Legs:${data.stats[id - 1].legs} </li>
+                      
+                  </ul>
+              </div>
+          </div>
+      </div>
+  `)
+    })
+    .fail((err)=> {
+      console.log(err)
+    })
+  })
+  
 })
 
 function youtubeEmbeded() {
-  $(`#landing-page`).hide()
+ 
 
   const inputSearch = $(`#search-input`).val()
-  console.log(inputSearch)
-  $(`#player`).empty()
+  let html = '';
+  
   event.preventDefault()
   $.ajax({
       method : `GET`,
       url: `http://localhost:3000/live/youtube/${inputSearch}`,
-      // data : {input : inputsearch}
+      headers: { 'token': localStorage.getItem('token') }
+    
   })
   .done((vids)=> {
-      vids.forEach(vid => {
-         $(`#player`).append(`
-         <iframe width="560" height="315" src="https://www.youtube.com/embed/${vid.id.videoId}"></iframe>
-         `)
-      })
+    vids.forEach(vid => {
+      html += `
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/${vid.id.videoId}"></iframe>
+      `
+    })
+      $('#landing-page').hide()
+      $('#content-cards').hide()
+      $('#livestream').empty()
+      $('#player').empty()
+      $('#player').html(html)
+      $('#player').show();
   })
   .fail((err)=> {
       console.log(err)
@@ -49,22 +103,21 @@ function youtubeEmbeded() {
 }
 
 function getLandingPage() {
-  $('#livestream').hide();
-  $('#content-cards').hide();
+  $('#landing-page').hide()
+  $('#content-cards').hide()
+  $('#livestream').empty()
+  $('#player').empty()
   $('#landing-page').show();
 }
 
 function getHeroesCards(type){
   $.ajax({
     url: `${baseurl}/dota/heroes`,
-    method: 'GET'
+    method: 'GET',
+    headers: { 'token': localStorage.getItem('token') }
   })
     .done((heroes) => {
       
-      $('#landing-page').hide();
-      $('#livestream').hide();
-      $('#content-cards').empty();
-      $('#content-cards').show();
       const {str, agi ,int } = groupHeroesByAttr(heroes.stats);
  
       switch(type) {
@@ -89,7 +142,11 @@ function getHeroesCards(type){
         default:
         break;
       }
-      
+      $('#landing-page').hide()
+      $('#content-cards').hide()
+      $('#livestream').empty()
+      $('#player').empty()
+      $('#content-cards').show();
     })
     .fail(err => {
       console.log(err)
@@ -123,14 +180,11 @@ function getLiveStream() {
 
   $.ajax({
     method: 'GET',
-    url:`${baseurl}/live/videos`
+    url:`${baseurl}/live/videos`,
+    headers: { 'token': localStorage.getItem('token') }
   })
 
     .done((data) => {
-
-      $('#landing-page').hide();
-      $('#content-cards').hide();
-
       let html = ''
       let streamer = data.data
       for (let i = 0 ; i< streamer.length; i++) {
@@ -149,6 +203,11 @@ function getLiveStream() {
           </div>
         `
       }
+      $('#landing-page').hide()
+      $('#content-cards').hide()
+      $('#livestream').empty()
+      $('#player').empty()
+      $('#content-cards').show();
       $('#livestream').append(html);
       $('#livestream').show();
     })
@@ -156,52 +215,6 @@ function getLiveStream() {
       console.log(err)
     })
 }
-
-$(`#content-cards`).on('click', '.see-detail', function(){
-  const id = this.id  
-
-  $.ajax({
-    url: `${baseurl}/dota/heroes`,
-    method: 'GET'
-  })
-  .done((data)=>{
-    // console.log(data)
-    $(`#exampleModalLabel`).html(`Hero <img src="${data.stats[id - 1].icon} "> Detail :` )
-    $('.modal-body').html(`
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-4">
-                <img src="" class="img-fluid">
-            </div>
-            <div class="col-md-8">
-                <ul class="list-group" style="margin-left:-52%">
-    <li class="list-group-item"><h3>${data.stats[id - 1].name}</h3></li>
-    <li class="list-group-item">Type:${data.stats[id - 1].attack_type} </li>
-    <li class="list-group-item">Roles:  ${[...data.stats[id - 1].roles]}</li>
-    <li class="list-group-item">Base Health:${data.stats[id - 1].base_health} </li>
-    <li class="list-group-item">Base Mana:${data.stats[id - 1].base_mana} </li>
-    <li class="list-group-item">Base Armor:${data.stats[id - 1].base_armor} </li>
-    <li class="list-group-item">Base Attack Min:${data.stats[id - 1].base_attack_min} </li>
-    <li class="list-group-item">Base Attack Max:${data.stats[id - 1].base_attack_max} </li>
-    <li class="list-group-item">Base Str:${data.stats[id - 1].base_str} </li>
-    <li class="list-group-item">Base Agi:${data.stats[id - 1].base_agi} </li>
-    <li class="list-group-item">Base Int:${data.stats[id - 1].base_int} </li>
-    <li class="list-group-item">Attack Range:${data.stats[id - 1].attack_range} </li>
-    <li class="list-group-item">Attack Rate:${data.stats[id - 1].attack_rate} </li>
-    <li class="list-group-item">Move Speed:${data.stats[id - 1].move_speed} </li>
-    <li class="list-group-item">Projectile Speed:${data.stats[id - 1].projectile_speed} </li>
-    <li class="list-group-item">Legs:${data.stats[id - 1].legs} </li>
-                    
-                </ul>
-            </div>
-        </div>
-    </div>
-`)
-  })
-  .fail((err)=> {
-    console.log(err)
-  })
-})
 
 function generateHeroCard(obj) {
   
