@@ -1,8 +1,8 @@
 const baseurl = 'http://localhost:3000'
 
-$('document').ready(function() {
-  liveStream()
-})
+// $('document').ready(function() {
+  
+// })
 
 function liveStream() {
   $.ajax({

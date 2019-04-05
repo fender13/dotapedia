@@ -31,9 +31,9 @@
       <a class="navbar-brand" style="color:white;"><img src="public/img/images.png" width="40px"
           height="40px"></i>Dotapedia</a>
       <a id="livestream-button" class="navbar-brand" style="color:white;" href="#">Live Streaming !</a>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button type="button" class="btn btn-danger">Search</button>
+      <form class="form-inline" onsubmit="youtubeEmbeded()">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+        <button type="submit" class="btn btn-danger" >Search</button>
         <!--Google Sign in-->
       </form>
       <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
@@ -81,19 +81,16 @@
   </div>
 
 
+  <div id="player">
 
+  </div>
 
 
   <div class="live-stream">
     <!-- <iframe src="https://player.twitch.tv/?autoplay=false&video=v366031213" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe><a href="https://www.twitch.tv/videos/366031213?tt_content=text_link&tt_medium=vod_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch Cena from mercy_stream on www.twitch.tv</a> -->
 
-    <iframe src="https://player.twitch.tv/?channel=Rayuur" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe><a href="https://www.twitch.tv/Rayuur?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch live video from ybicanoooobov on www.twitch.tv</a>
+    <!-- <iframe src="https://player.twitch.tv/?channel=Rayuur" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe><a href="https://www.twitch.tv/Rayuur?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch live video from ybicanoooobov on www.twitch.tv</a> -->
   </div>
-
-
-
-
-
 
 
   <!-- Optional JavaScript -->

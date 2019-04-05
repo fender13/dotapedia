@@ -1,5 +1,5 @@
 $(document).ready(function( ) {
-  getLiveStreamPage();
+  // getLiveStreamPage();
   $('#str-button').on('click', function() {
       getHeroesCards('str')
   })
@@ -9,12 +9,37 @@ $(document).ready(function( ) {
   $('#int-button').on('click', function() {
       getHeroesCards('int')
   })
+  // liveStream()
   // $('livestream-button').on('click', function(){
   //     getLiveStreamPage();
   // })
 
 
 })
+
+function youtubeEmbeded() {
+  const inputSearch = $(`#search-input`).val()
+  console.log(inputSearch)
+  $(`#player`).empty()
+  event.preventDefault()
+  $.ajax({
+      method : `GET`,
+      url: `http://localhost:3000/live/youtube/${inputSearch}`,
+      // data : {input : inputsearch}
+  })
+  .done((vids)=> {
+      vids.forEach(vid => {
+         $(`#player`).append(`
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/${vid.id.videoId}"></iframe>
+         `)
+      })
+  })
+  .fail((err)=> {
+      console.log(err)
+  })
+
+}
+
 
 function getHeroesCards(type){
   $.ajax({
@@ -56,29 +81,29 @@ function getHeroesCards(type){
     })
 }
 
-function getLiveStreamPage(){
+// function getLiveStreamPage(){
 
-  $('#landing-page').hide();
-  $('#content-cards').hide();
+//   $('#landing-page').hide();
+//   $('#content-cards').hide();
 
-    $.ajax({
-      method: 'GET',
-      url:`http://localhost:3000/live/videos`
-    })
-      .done((data) => {
+//     $.ajax({
+//       method: 'GET',
+//       url:`http://localhost:3000/live/videos`
+//     })
+//       .done((data) => {
 
-        data.data.forEach((el) => {
-          $('livestream').append(`
-          <div class ="col-md-4 my-1 mx-1>
-            <iframe src="https://player.twitch.tv/?channel=${el}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe><a href="https://www.twitch.tv/${el}?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch live video from ybicanoooobov on www.twitch.tv</a>
-          </div>
-         `)
-        })  
-      })  
-      .fail((err) => {
-        console.log(err.message)
-      })
-}
+//         data.data.forEach((el) => {
+//           $('livestream').append(`
+//           <div class ="col-md-4 my-1 mx-1>
+//             <iframe src="https://player.twitch.tv/?channel=${el}" frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620"></iframe><a href="https://www.twitch.tv/${el}?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch live video from ybicanoooobov on www.twitch.tv</a>
+//           </div>
+//          `)
+//         })  
+//       })  
+//       .fail((err) => {
+//         console.log(err.message)
+//       })
+// }
 
 function groupHeroesByAttr(array){
   const agi = [];
