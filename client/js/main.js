@@ -15,7 +15,17 @@ function liveStream() {
       let dataUser = data.data
       for (let i = 0 ; i< dataUser.length; i++) {
         html += `
-        <iframe src="https://player.twitch.tv/?channel=${dataUser[i]}" frameborder="0" allowfullscreen="true" height="378" width="620"></iframe><a href="https://www.twitch.tv/${dataUser[i]}?tt_content=text_link&tt_medium=live_embed" style="padding:2px 0px 4px; display:block; width:345px; font-weight:normal; font-size:10px; text-decoration:underline;">Watch live video from ybicanoooobov on www.twitch.tv</a>
+        <iframe
+            src="https://player.twitch.tv/?channel=${dataUser[i]}&autoplay=false"
+            height="720"
+            width="1280"
+    
+      
+            allowfullscreen="true">
+        </iframe>
+
+
+
         `
       }
       $('.live-stream').append(html);

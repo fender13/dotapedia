@@ -1,4 +1,5 @@
 $(document).ready(function( ) {
+  $('#sound_tag')[0].play()
   getLiveStreamPage();
   $('#str-button').on('click', function() {
       getHeroesCards('str')
