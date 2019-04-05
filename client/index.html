@@ -41,36 +41,44 @@
   </nav>
 
   <!--Main Content-->
-  <div class="card-group" style="margin:5px">
-    <div class="card">
-      <img src="public/img/nightstalker.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Strength</h5>
-        <p class="card-text">is one of the three primary attributes with the theme of defending against magic damage. It
-          grants health, health regeneration, and magic resistance to every hero. Strength heroes also gain attack
-          damage per point of strength.</p>
-        <p class="card-text"><small class="text-muted"><img src="public/img/str.png" alt=""></small></p>
+  <div id="main-content" class="card-group" style="margin:5px">
+    <div id= "content-cards" class = "row"></div>
+    <div id="landing-page" class ="card-group">
+      <div class="card">
+        <img src="public/img/nightstalker.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Strength</h5>
+          <p class="card-text">is one of the three primary attributes with the theme of defending against magic damage. It
+            grants health, health regeneration, and magic resistance to every hero. Strength heroes also gain attack
+            damage per point of strength.</p>
+          <p class="card-text"><small class="text-muted"><img src="public/img/str.png" alt=""></small></p>
+          <button id ="str-button" type="button" class="btn btn-dark">STR</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="public/img/anti-mage.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Agility</h5>
+          <p class="card-text">Agility attribute is one of the three primary attributes that grants movement and attack
+            speed and armor to every hero. Agility heroes also gain attack damage per point of agility.</p>
+          <p class="card-text"><small class="text-muted"><img src="public/img/agi.png" alt=""></small></p>
+          <button id ="agi-button" type="button" class="btn btn-dark">AGI</button>
+        </div>
+      </div>
+      <div class="card">
+        <img src="public/img/shaman.png" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Intelligent</h5>
+          <p class="card-text">is one of the three primary attributes with the theme of improving spell-casting. It grants
+            mana, mana regeneration and spell damage amplification to every hero. Intelligence heroes also gain attack
+            damage per point of intelligence.</p>
+          <p class="card-text"><small class="text-muted"><img src="public/img/int.png" alt=""></small></p>
+          <button id ="int-button" type="button" class="btn btn-dark">INT</button>
+        </div>
       </div>
     </div>
-    <div class="card">
-      <img src="public/img/anti-mage.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Agility</h5>
-        <p class="card-text">Agility attribute is one of the three primary attributes that grants movement and attack
-          speed and armor to every hero. Agility heroes also gain attack damage per point of agility.</p>
-        <p class="card-text"><small class="text-muted"><img src="public/img/agi.png" alt=""></small></p>
-      </div>
-    </div>
-    <div class="card">
-      <img src="public/img/shaman.png" class="card-img-top" alt="...">
-      <div class="card-body">
-        <h5 class="card-title">Intelligent</h5>
-        <p class="card-text">is one of the three primary attributes with the theme of improving spell-casting. It grants
-          mana, mana regeneration and spell damage amplification to every hero. Intelligence heroes also gain attack
-          damage per point of intelligence.</p>
-        <p class="card-text"><small class="text-muted"><img src="public/img/int.png" alt=""></small></p>
-      </div>
-    </div>
+
+   
   </div>
 
 
@@ -99,6 +107,7 @@
   </script>
   <!--Custom Script-->
 
+  <script src="./js/script.js"></script>
   <script src="./js/main.js"></script>
 </body>
 
