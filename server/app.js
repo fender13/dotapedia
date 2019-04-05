@@ -8,11 +8,8 @@ ENV.config()
 const port = Number(process.env.PORT) || 3000;
 
 const indexRouter = require('./routes/index')
-
 const liveRouter = require('./routes/liveStream')
-
 const dotaApiRouter = require('./routes/dotaApi')
-
 
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())

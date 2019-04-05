@@ -7,13 +7,13 @@ module.exports = {
     getVideos(req, res) {
         _axios
             .get(`/search?part=snippet&q=tutorial%20dota2%20${req.params.search}&type=video&key=${process.env.YOUTUBE_API}`)
-            .then(({data})=> {
-                // console.log(data.items)
+            .then(({ data })=> {
                 res.status(200).json(data.items)
             })
-            .catch((err)=> {
-                console.log(err)
-                res.status(500).json(err)
+            .catch(({ response })=> {
+                res.status(500).json({
+                    message: response
+                })
             })
     }
 }
