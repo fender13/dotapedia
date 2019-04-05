@@ -22,6 +22,29 @@ $(document).ready(function( ) {
 
 })
 
+function youtubeEmbeded() {
+  const inputSearch = $(`#search-input`).val()
+  console.log(inputSearch)
+  $(`#player`).empty()
+  event.preventDefault()
+  $.ajax({
+      method : `GET`,
+      url: `http://localhost:3000/live/youtube/${inputSearch}`,
+      // data : {input : inputsearch}
+  })
+  .done((vids)=> {
+      vids.forEach(vid => {
+         $(`#player`).append(`
+         <iframe width="560" height="315" src="https://www.youtube.com/embed/${vid.id.videoId}"></iframe>
+         `)
+      })
+  })
+  .fail((err)=> {
+      console.log(err)
+  })
+
+}
+
 function getLandingPage() {
   $('#livestream').hide();
   $('#content-cards').hide();

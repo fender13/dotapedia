@@ -28,12 +28,13 @@
   <!-- Nav Bar-->
   <nav class="navbar navbar-light" style="background-color:black">
  
-      <button id="landing-button" class="navbar-brand btn btn-link" style="color:white;"><img src="public/img/images.png" width="40px"
+
+     <button id="landing-button" class="navbar-brand btn btn-link" style="color:white;"><img src="public/img/images.png" width="40px"
           height="40px"></i>Dotapedia</button>
       <button id="livestream-button" class="navbar-brand btn btn-link" style="color:white;">Live Streaming !</button>
-      <form class="form-inline">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button type="button" class="btn btn-danger">Search</button>
+      <form class="form-inline" onsubmit="youtubeEmbeded()">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+        <button type="submit" class="btn btn-danger" >Search</button>
         <!--Google Sign in-->
       </form>
       <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
@@ -83,13 +84,9 @@
   
 
 
+  <div id="player">
 
-
-
-
-
-
-
+  </div>
 
 
   <!-- Optional JavaScript -->
