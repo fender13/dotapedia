@@ -21,47 +21,25 @@ function getHeroesCards(type){
 
       const {str, agi ,int } = groupHeroesByAttr(heroes.stats);
  
-     
-                  
-
       switch(type) {
         case 'str':
           str.forEach(el => {
-            $('#content-cards').append
-              (`<div class="col-md-4>
-                  <div class="card mb-3>
-                  <img style="width: 287px; height: 326px;" src="${el}"><br>
-                  <a href="#" class="card-link">Card link</a>
-                  </div>
-                </div> 
-              `)  
+            generateHeroCard(el);
           })
         break;
-        case 'agi':
 
+        case 'agi':
         agi.forEach(el => {
-          $('#content-cards').append
-          (`<div class="col-md-4>
-              <div class="card mb-3>
-              <img style="width: 287px; height: 326px;" src="${el}"><br>
-              <a href="#" class="card-link">Card link</a>
-              </div>
-            </div> 
-          `)  
+          generateHeroCard(el);
         })
         break;
+
         case 'int':
           int.forEach(el => {
-            $('#content-cards').append
-            (`<div class="col-md-4>
-                <div class="card mb-3>
-                <img style="width: 287px; height: 326px;" src="${el}"><br>
-                <a href="#" class="card-link">Card link</a>
-                </div>
-              </div> 
-            `)  
+            generateHeroCard(el);
           })
         break;
+
         default:
         break;
       }
@@ -91,9 +69,18 @@ function groupHeroesByAttr(array){
       break;
    }
   })
-  return { agi, int, str }
+  return { str, agi, int }
 }
 
-
-
-
+function generateHeroCard(imgurl) {
+  
+  $('#content-cards').append
+    (`<div class="col-md-4">
+      <div class="container-fluid card my-3 mx-3">
+      <img style="width: 180px; height: 180px;" src="${imgurl}"><br>
+      <a href="#" class="card-link">Card link</a>
+      </div>
+    </div> 
+  `)  
+  
+}
