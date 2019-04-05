@@ -46,7 +46,8 @@ class UserController {
               token: jwt.sign({
                 id: logged.id,
                 email: logged.email
-              }, process.env.JWTSECRET), data: data
+              }, process.env.JWTSECRET), 
+              data: data
             })
           })
         }
